@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "5442ff1e-958c-42b6-9450-2b3bb7b5d563",
+		"name": "PDV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4817012"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "pdv@pdv.com",
+							"description": "email do usuario do pdv",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"description": "senha do usuario do pdv",
+							"type": "text"
+						},
+						{
+							"key": "Retorna Token",
+							"value": "",
+							"description": "retona um token que deve ser enviado no cabeçario de todas as outras request",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.bankis.com.br/api/pdv/logar",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bankis",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"pdv",
+						"logar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "coloca o token retornado  do login aqui",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.bankis.com.br/api/pdv/user",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bankis",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"pdv",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Historico de Trasações",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "coloca o token retornado  do login aqui",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.bankis.com.br/api/pdv/gethistorico?status=tudo&order=id&order_tipo=desc",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bankis",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"pdv",
+						"gethistorico"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "tudo",
+							"description": "tudo = todos, Pago retorna os pagos, Estornado retorna todos os estornados"
+						},
+						{
+							"key": "texto",
+							"value": null,
+							"description": "enviar esse caso queira fazer pesquisa dentro do historico",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "id",
+							"description": "ordernar por id,nomeUserPDV,nomeUserCliente,tipo,status,valor,user_pdv,user_clienteparceiro_id,created_at"
+						},
+						{
+							"key": "order_tipo",
+							"value": "desc",
+							"description": "ordernar por desc, asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1 -Retona nome do cliente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "coloca o token retornado  do login aqui",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cpf",
+							"value": "36961573843",
+							"description": "envia cpf do cleinte que vai realizar a compra",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.bankis.com.br/api/pdv/pagamento",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bankis",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"pdv",
+						"pagamento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2 - Retona beneficios que o cliente ta cadastrado",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "coloca o token retornado  do login aqui",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cpf",
+							"value": "36961573843",
+							"description": "envia cpf do cliente que vai realizar a compra",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.bankis.com.br/api/pdv/beneficios",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bankis",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"pdv",
+						"beneficios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3 - Se a senha estiver certa faz a compra",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "coloca o token retornado  do login aqui",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cpf",
+							"value": "36961573843",
+							"description": "envia cpf do cleinte que vai realizar a compra",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"description": "Senha do cliente que fez a compra",
+							"type": "text"
+						},
+						{
+							"key": "beneficio_id",
+							"value": "1",
+							"description": "o id do beneficio retonado no passo anterior",
+							"type": "text"
+						},
+						{
+							"key": "valortotal",
+							"value": "22",
+							"description": "valor total da compra",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.bankis.com.br/api/pdv/verificar/password",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bankis",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"pdv",
+						"verificar",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Estornar compra",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "coloca o token retornado  do login aqui",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "Id da trasação a ser estornada",
+							"type": "text"
+						},
+						{
+							"key": "user_cliente",
+							"value": "1",
+							"description": "Id do cliente quem vem no historico",
+							"type": "text"
+						},
+						{
+							"key": "beneficio_id",
+							"value": "1",
+							"description": "o id do beneficio quem vem no historico",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.bankis.com.br/api/pdv/estornar",
+					"protocol": "https",
+					"host": [
+						"api",
+						"bankis",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"pdv",
+						"estornar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

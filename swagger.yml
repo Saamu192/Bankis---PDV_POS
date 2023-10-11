@@ -1,0 +1,144 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: PDV API
+basePath: /
+schemes:
+  - https
+paths:
+  /pdv/logar:
+    post:
+      summary: Login
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: email
+          in: formData
+          type: string
+          description: email do usuario do pdv
+        - name: password
+          in: formData
+          type: string
+          description: senha do usuario do pdv
+        - name: Retorna Token
+          in: formData
+          type: string
+          description: retona um token que deve ser enviado no cabeçalho de todas as outras request
+          required: false
+          x-internal-disabled: true
+      responses:
+        200:
+          description: Success
+  /pdv/user:
+    get:
+      summary: Get User
+      parameters:
+        - name: token
+          in: header
+          type: string
+          required: true
+          description: Token obtido do login
+      responses:
+        200:
+          description: Success
+  /pdv/gethistorico:
+    post:
+      summary: Historico de Trasações
+      parameters:
+        - name: token
+          in: header
+          type: string
+          required: true
+          description: Token obtido do login
+        - name: status
+          in: query
+          type: string
+          description: tudo = todos, Pago retorna os pagos, Estornado retorna todos os estornados
+        - name: texto
+          in: query
+          type: string
+          required: false
+          x-internal-disabled: true
+        - name: order
+          in: query
+          type: string
+          description: ordernar por id,nomeUserPDV,nomeUserCliente,tipo,status,valor,user_pdv,user_clienteparceiro_id,created_at
+        - name: order_tipo
+          in: query
+          type: string
+          description: ordernar por desc, asc
+      responses:
+        200:
+          description: Success
+  /pdv/pagamento:
+    post:
+      summary: 1 -Retona nome do cliente
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: cpf
+          in: formData
+          type: string
+          description: envia cpf do cleinte que vai realizar a compra
+      responses:
+        200:
+          description: Success
+  /pdv/beneficios:
+    post:
+      summary: 2 - Retona beneficios que o cliente ta cadastrado
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: cpf
+          in: formData
+          type: string
+          description: envia cpf do cliente que vai realizar a compra
+      responses:
+        200:
+          description: Success
+  /pdv/verificar/password:
+    post:
+      summary: 3 - Se a senha estiver certa faz a compra
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: cpf
+          in: formData
+          type: string
+          description: envia cpf do cleinte que vai realizar a compra
+        - name: password
+          in: formData
+          type: string
+          description: Senha do cliente que fez a compra
+        - name: beneficio_id
+          in: formData
+          type: string
+          description: o id do beneficio retonado no passo anterior
+        - name: valortotal
+          in: formData
+          type: string
+          description: valor total da compra
+      responses:
+        200:
+          description: Success
+  /pdv/estornar:
+    post:
+      summary: Estornar compra
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: id
+          in: formData
+          type: string
+          description: Id da trasação a ser estornada
+        - name: user_cliente
+          in: formData
+          type: string
+          description: Id do cliente quem vem no historico
+        - name: beneficio_id
+          in: formData
+          type: string
+          description: o id do beneficio quem vem no historico
+      responses:
+        200:
+          description: Success
