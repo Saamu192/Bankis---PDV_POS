@@ -15,7 +15,3 @@ app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.listen(PORT, () => {
   console.log(`Server Running at PORT ${PORT} and PID ${process.pid}`);
 });
-
-(() => {
-  exec("npm run start");
-})();
