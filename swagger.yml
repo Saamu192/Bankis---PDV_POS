@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "1.0.0"
-  title: PDV API
+  title: FIZBANK PDV API
 basePath: /
 schemes:
   - https
@@ -62,7 +62,7 @@ paths:
         - name: order
           in: query
           type: string
-          description: ordernar por id,nomeUserPDV,nomeUserCliente,tipo,status,valor,user_pdv,user_clienteparceiro_id,created_at
+          description: ordernar por id, nomeUserPDV, nomeUserCliente, tipo, status, valor, user_pdv, user_clienteparceiro_id, created_at
         - name: order_tipo
           in: query
           type: string
@@ -79,13 +79,13 @@ paths:
         - name: cpf
           in: formData
           type: string
-          description: envia cpf do cleinte que vai realizar a compra
+          description: envia cpf do cliente que vai realizar a compra
       responses:
         200:
           description: Success
   /pdv/beneficios:
     post:
-      summary: 2 - Retona beneficios que o cliente ta cadastrado
+      summary: 2 - Retona beneficios ao qual o cliente está cadastrado
       consumes:
         - application/x-www-form-urlencoded
       parameters:
@@ -105,7 +105,7 @@ paths:
         - name: cpf
           in: formData
           type: string
-          description: envia cpf do cleinte que vai realizar a compra
+          description: envia cpf do cliente que vai realizar a compra
         - name: password
           in: formData
           type: string
